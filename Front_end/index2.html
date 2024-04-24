@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="/url" method="post" enctype="multipart/form-data">
+        <div>
+          <label>名前：<input required type="text" placeholder="入力してください" name="name"/></label>    
+        </div>
+        <div>
+          <label>メール：<input required type="email" placeholder="メールアドレス" name="email"/></label>
+        </div>
+        <div>
+          <label>パスワード：<input required type="password" placeholder="パスワード" name="password"/></label>
+        </div>
+        <div>
+          性別：<label><input type="radio" name="gendar" value="male"/>男性</label><label><input type="radio" name="gendar" value="female"/>女性</label>
+        </div>
+        <div>
+          <label>地域：
+            <select name="area">
+              <option value="hokkaido">北海道</option>
+              <option value="tohoku">東北</option>
+              <option value="kanto">関東</option>
+              <option value="cyubu">中部</option>
+              <option value="kansai">関西</option>
+              <option value="sikoku">四国</option>
+              <option value="kyusyu">九州</option>
+              <option value="okinawa">沖縄</option>
+            </select>
+          </label>
+        </div>
+        <div>
+          <label>数量：
+          <input name="amount" type="range" min=0 max=20 step=1 value=1 /></label>  
+          <input type="number" min=0 max=20 step=1 value=1 />
+        </div>
+        <div>
+          <label>色：<input name="color" type="color" /></label>  
+        </div>
+        <div>
+          <label>希望日：<input name="date" type="date" value="2020-01-01" /></label>  
+        </div>
+        <div>
+          <label>希望時間：<input name="time" type="time" value="06:00" /></label>  
+        </div>
+        <div>
+          <label>備考：<textarea name="something" cols=40 rows=4 placeholder="自由記入欄"></textarea></label> 
+        </div>
+        <div>
+          <lable>添付：<input type="file"/></label>
+        </div>
+        <div>
+          <lable>同意する：<input type="checkbox"/></label>
+        </div>
+        <input type="hidden" value="secret_value"/>
+        <input type="submit" value="送信"/>
+      </form>
+      <div>
+        <img src="https://github.com/teradonburi/resource/blob/master/image.jpg?raw=true" width=300 />
+        <audio controls>
+          <source src="https://raw.githubusercontent.com/teradonburi/resource/master/se.mp3" />
+        </audio>
+        <video controls width=300>
+          <source src="https://raw.githubusercontent.com/teradonburi/resource/master/video.mp4" />
+        </video>
+      </div>
+</body>
+</html>

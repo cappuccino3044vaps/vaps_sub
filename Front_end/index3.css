@@ -1,0 +1,32 @@
+/* 全称セレクタ */  
+* {color:red;}
+/* 要素型セレクタ */
+p {color:blue;}
+/* idセレクタ */
+div#sample {color:green;}
+/* classセレクタ */ 
+div.sample {color:grey;}
+/* 擬似クラス */
+a:link {color:black;}
+a:visited {color:red;}
+a:hover {color:purple;}
+a:active {color:green;}
+input:focus {background:grey;}
+h1:first-child {color:purple;}
+/* 擬似要素 */
+h2:first-line {color:green;}
+h2:first-letter {color:red;}
+h3:before {content:"『";}
+h3:after {content:"』";}
+/* 属性セレクタ */
+a[target] {color:pink;}
+a[target="_blank"] {color:lightgreen;}
+a[class*="sample"] {color:aqua;}
+/* 複数のセレクタ */
+h4, h5 {color:black;}
+/* 子孫セレクタ */  
+div section {color:black;}
+/* 子セレクタ  */  
+div > article {color:grey;}
+/* 隣接セレクタ */
+article + p {color:orange;}

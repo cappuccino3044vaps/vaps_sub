@@ -1,0 +1,50 @@
+%\documentclass[10pt,twocolumn]{jsarticle}  % 標準サイズ
+\documentclass[9pt,twocolumn]{jsarticle}  % ガチガチ詰め込みの場合
+%\usepackage[subrefformat=parens]{subcaption}
+%% style file
+\usepackage[dvips]{vapslayout_2017}
+% \usepackage[dvipdfmx]{vapslayout_2017}
+%% -------------------------------------------------------------------------
+%%                各種マージン  ( 出来るだけ使用しないでください )
+%% -------------------------------------------------------------------------
+
+%% %% 図と図の間の余白
+%% \setlength\floatsep{0mm}
+
+%% %% 本文と図の間の余白
+%% \setlength\textfloatsep{-2mm}
+%% \setlength\textfloatsep{0mm}
+
+%% %% 本文中の図の余白
+\setlength\intextsep{3mm}
+
+%% 図とキャプションの間の余白
+\setlength\abovecaptionskip{0.0zh}
+
+%% 図表のcaption下部のマージン
+%\setlength{\belowcaptionskip}{0.0zh}
+\setlength{\belowcaptionskip}{-0.5zh}
+
+%% %% ２段組の場合
+%% \setlength{\dblfloatsep}{-2mm}
+%% \setlength{\dbltextfloatsep}{-2mm}
+
+%%  数式上下マージン ( vapsalign )
+\def\abovemathsize{ 2pt}
+\def\belowmathsize{-2pt}
+
+%%図と表を横並びにするときに使用
+%\makeatletter
+%\newcommand{\figcaption}[1]{\def\@captype{figure}\caption{#1}}
+%\newcommand{\tblcaption}[1]{\def\@captype{table}\caption{#1}}
+%\makeatother
+
+%% -------------------------------------------------------------------------
+%%                                 main
+%% -------------------------------------------------------------------------
+
+\begin{document}
+
+\input{main.tex}
+
+\end{document}

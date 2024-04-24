@@ -1,0 +1,224 @@
+%%--------------------------------------
+%%    MASAOKA, Akihiro  (2016/11/02)
+%%--------------------------------------
+%%      修論・卒論レジメ用スタイル
+%%--------------------------------------
+
+%% 小濱先生の作成したスタイルをもとに，作成させていただきました．
+
+%% Viallayout_2013 からの変更点：
+%% 使用上の形式変更なし
+%% ヘッダー，指導教員名，学籍番号の有無を統一するために作成
+%%
+%% vapslayout_2015 からの変更点：
+%% 修士研究中間報告会抄録 → 修士論文中間報告会抄録
+
+%% 2016/02/16
+%% section 上マージンを調整
+
+%% 2016/08/09
+%% \mktitile コマンドの形式を変更
+
+%% 2016/11/02
+%% vapsalign を追加
+
+%% 2017/10/27
+%% pdf でフォーマットが崩れないように，driver が指定
+
+%% 2019/11/12
+%% subcaption環境で統一 by 平井
+
+%% 2020/10/27
+%% 年号を令和に変更
+%% 学科名称を生命情報工学科に変更（本間）
+
+%%-----------------------------------------------------------%%
+%%                 ファイルの重複を防止
+%%-----------------------------------------------------------%%
+\ProvidesPackage{vapslayout}[2019/11/12]
+
+
+%%-----------------------------------------------------------%%
+%%                 オプションの定義
+%%-----------------------------------------------------------%%
+\DeclareOption{dvips}{%
+  \newcommand{\geometrydriver}{dvips}%
+  \newcommand{\graphicxdriver}{dvips}%
+}%
+
+\DeclareOption{dvipdfmx}{%
+  \newcommand{\geometrydriver}{dvipdfm}%
+  \newcommand{\graphicxdriver}{dvipdfmx}%
+}%
+
+
+\ProcessOptions\relax
+
+% 上下，左右のマージン
+\RequirePackage[\geometrydriver,top=20mm,bottom=18mm,left=18mm,right=18mm]{geometry}%
+
+% 図を使う場合
+\usepackage[\graphicxdriver]{graphicx}%
+
+% subcaption
+\usepackage[subrefformat=parens]{subcaption}%
+
+%%-----------------------------------------------------------%%
+%%                     パッケージ各種
+%%-----------------------------------------------------------%%
+%% 論文，抄録執筆に必要な図，数式関連パッケージ
+\usepackage{amsmath}
+
+
+%% 図の位置を強制できる
+\usepackage{here}
+
+%% ヘッダー
+\usepackage{fancyhdr}
+
+
+%% 左右段の間隔を設定
+%% \setlength{\columnsep}{12pt}
+\setlength{\columnsep}{2.5zw}  %% Masaoka 2016/11/02
+
+%%-----------------------------------------------------------%%
+%%                       ヘッダー定義
+%%-----------------------------------------------------------%%
+\renewcommand{\headrulewidth}{.0pt}
+\lhead[]{}
+\cfoot{}
+\pagestyle{fancy}
+
+
+%%-----------------------------------------------------------%%
+%%                     タイトル等の設定
+%%-----------------------------------------------------------%%
+%% #1:年度, #2:タイトル, #3:学籍番号, #4:氏名
+
+\newcommand{\mktitle}[4]{%
+  \rhead[]{\underline{%
+    \footnotesize #1}}%
+\twocolumn[%
+  \centering
+  {\Large\bf #2}\\
+   \vspace{.5em}
+   {\large 視覚認知システム研究室 \hspace{1em}{#3}\hspace{1em}#4%
+     \hspace{3em}指導教員：小濱~~剛}\\
+   \vspace{1.5em}]%
+   %\vspace*{-2em}
+   \setlength\baselineskip{1.6zh}   
+}
+
+
+%%-----------------------------------------------------------%%
+%%                修論・卒論などのヘッダーを指定
+%%                   ( Masaoka  2016/08/09 )
+%%-----------------------------------------------------------%%
+%% #1:ヘッダ, #2:タイトル, #3:学籍番号, #4:氏名
+
+%% 卒業論文
+\newcommand{\mktitleb}[4]{%
+  \mktitle{%
+    近畿大学生物理工学部生命情報工学科~%
+    令和 $#1$年度~卒業論文抄録}%
+          {#2}{#3}{#4}
+}
+
+%% 卒業研究中間発表
+\newcommand{\mktitlebmid}[4]{%
+  \mktitle{%
+    近畿大学生物理工学部生命情報工学科~%
+    令和 $#1$年度~卒業研究中間発表会抄録}
+          {#2}{#3}{#4}
+}
+
+%% 修士論文
+\newcommand{\mktitlem}[4]{%
+  \mktitle{%
+    近畿大学大学院生物理工学研究科生体システム工学専攻~%
+    令和 $#1$年度~修士論文抄録}
+          {#2}{#3}{#4}
+}
+
+%% 修士研究中間発表
+\newcommand{\mktitlemmid}[4]{%
+  \mktitle{%
+    近畿大学大学院生物理工学研究科生体システム工学専攻~%
+    令和 $#1$年度~修士論文中間発表会抄録}
+          {#2}{#3}{#4}
+}
+
+%%-----------------------------------------------------------%%
+%%          align 環境を新しく定義 ( 数式上下マージン調整 )
+%%                   ( Masaoka  2016/11/02 )
+%%-----------------------------------------------------------%%
+\newenvironment{vapsalign}
+{\abovedisplayskip = \abovemathsize
+ \belowdisplayskip = \belowmathsize
+ \align}
+{\endalign}
+
+
+%%-----------------------------------------------------------%%
+%%                \section 上部のマージンを揃える
+%%                     ( Masaoka  2016/02 )
+%%-----------------------------------------------------------%%
+\def\@startsection#1#2#3#4#5#6{%  %% \@startsection を再定義
+  \if@noskipsec \leavevmode \fi
+  \par  %% 改行
+  \@tempskipa #4\relax  %% 見出し前のマージン
+   %%\if@english \@afterindentfalse \else \@afterindenttrue \fi
+  %% 長さを比較 ( \ifdim )
+  \ifdim \@tempskipa <\z@   %% 見出し前のマージン < 0
+   \@tempskipa -\@tempskipa \@afterindentfalse  %% 改行なし
+  \fi  %% \ifdim \@tempskipa <\z@
+  \if@nobreak
+   %% トークンレジスタ型のパラメタでその内容が全ての段落冒頭に自動的に挿入される
+   \everypar{}%
+  \else  %% \if@nobreak
+   \addpenalty\@secpenalty
+   %% 長さを比較 ( \ifdim )
+   \ifdim \@tempskipa >\z@  %% 見出し前のマージン > 0
+    \vskip\@tempskipa  %% 見出し上部のマージンを空ける ( 全体 )
+    \if@slide\else
+     \null   %% 水平方向の調整 : \hbox{}
+     %\vspace{-\baselineskip}%
+     \vspace{-3.8mm}%  %% 見出し上部のマージンを詰める ( ページの先頭のみ )
+    \fi  %% \if@slide\else
+   \fi  %% \ifdim \@tempskipa >\z@
+  \fi  %% \if@nobreak
+  \noindent  %% 字下げ防止 ( 見出し )
+  \@ifstar  %% *付きの場合の定義 or そうでない場合
+      {\@ssect{#3}{#4}{#5}{#6}}%
+      {\@dblarg{\@sect{#1}{#2}{#3}{#4}{#5}{#6}}}}
+
+
+
+%%-----------------------------------------------------------%%
+%%           参考文献参照番号の位置と大きさを再定義
+%%-----------------------------------------------------------%%
+\def\@cite#1{\textsuperscript{[#1]}}
+
+\renewenvironment{thebibliography}[1]{%
+  \global\let\presectionname\relax
+  \global\let\postsectionname\relax
+  \section*{\refname}\@mkboth{\refname}{\refname}%
+   \list{\@biblabel{\@arabic\c@enumiv}}%
+        {\settowidth\labelwidth{\@biblabel{#1}}%
+         \leftmargin\labelwidth
+         \advance\leftmargin\labelsep
+         \@openbib@code
+         \usecounter{enumiv}%
+         \let\p@enumiv\@empty
+         \footnotesize
+         \setlength\itemsep{0.4zh}
+         \setlength\baselineskip{1.3zh}
+         \renewcommand\theenumiv{\@arabic\c@enumiv}}%
+   \sloppy
+   \clubpenalty4000
+   \@clubpenalty\clubpenalty
+   \widowpenalty4000%
+   \sfcode`\.\@m}
+  {\def\@noitemerr
+    {\@latex@warning{Empty `thebibliography' environment}}%
+   \endlist}
